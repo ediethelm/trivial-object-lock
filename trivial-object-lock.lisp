@@ -50,17 +50,17 @@ Returns *NIL* if the lock was acquired; otherwise it returns a conditional varia
 	  (let ((entry (cadar (member property (getf object-lock :partial) :key #'first :test test))))
 	    (if entry
 		(trivial-utilities:aif (member thread entry :key #'third)
-		     (progn
-		       (log:debug "Recursive lock detected.")
-		       (incf (the fixnum (nth 4 (car it))))
-		       (setf cond-var nil))
-		     (progn
-		       (log:debug "Creating new entry for property '~a'." property)
-		       (nconc entry (list (list (get-universal-time)
-						(incf (the fixnum *lock-queue-counter*))
-						thread
-						(setf cond-var (if cond-var (bordeaux-threads:make-condition-variable) nil))
-						1)))))
+				       (progn
+					 (log:debug "Recursive lock detected.")
+					 (incf (the fixnum (nth 4 (car it))))
+					 (setf cond-var nil))
+				       (progn
+					 (log:debug "Creating new entry for property '~a'." property)
+					 (nconc entry (list (list (get-universal-time)
+								  (incf (the fixnum *lock-queue-counter*))
+								  thread
+								  (setf cond-var (if cond-var (bordeaux-threads:make-condition-variable) nil))
+								  1)))))
 		(setf (getf object-lock :partial)
 		      (nconc (getf object-lock :partial) (list (list property
 								     (list (list (get-universal-time)
@@ -70,20 +70,20 @@ Returns *NIL* if the lock was acquired; otherwise it returns a conditional varia
 										 1))))))))
 	  
 	  (trivial-utilities:aif (member thread (getf object-lock :full) :key #'third)
-	       (progn
-		 (incf (the fixnum (nth 4 (car it))))
-		 (setf cond-var nil))
-	       (setf (getf object-lock :full) (nconc (getf object-lock :full)
-						     (list (list (get-universal-time)
-								 (incf (the fixnum *lock-queue-counter*))
-								 thread
-								 (setf cond-var (if cond-var (bordeaux-threads:make-condition-variable) nil))
-								 1)))))))
+				 (progn
+				   (incf (the fixnum (nth 4 (car it))))
+				   (setf cond-var nil))
+				 (setf (getf object-lock :full) (nconc (getf object-lock :full)
+								       (list (list (get-universal-time)
+										   (incf (the fixnum *lock-queue-counter*))
+										   thread
+										   (setf cond-var (if cond-var (bordeaux-threads:make-condition-variable) nil))
+										   1)))))))
 
     (when (and blocking cond-var)
       (when (bordeaux-threads:condition-wait cond-var *function-lock* :timeout timeout)
 	(setf cond-var nil))))
-    
+  
   (return-from acquire-lock cond-var))
 
 (defun find-next-waiting-lock (object &aux (next nil) (part nil))
@@ -115,7 +115,7 @@ Returns *NIL* if the lock was acquired; otherwise it returns a conditional varia
 		     &aux (object-lock nil) (thread (bordeaux-threads:current-thread)))
   "Releases the lock held by the current thread on *OBJECT* and *PROPERTY*. 
 
-Relates to *ACQUIRE-LOCK*
+Relates to *ACQUIRE-LOCK*"
   (declare (type function test))
   
   (bordeaux-threads:with-lock-held (*function-lock*)
@@ -136,23 +136,23 @@ Relates to *ACQUIRE-LOCK*
 		  (return-from release-lock nil))
 
 		(trivial-utilities:aif (car (member thread entry :key #'third))
-		     (when (<= (decf (the fixnum (nth 4 it))) 0)
-		       (trivial-utilities:aif (delete-if #'(lambda (x) (eq x thread)) entry :key #'third)
-			    (setf (cadar (member property (getf object-lock :partial) :key #'first :test test)) it)
-			    (setf (getf object-lock :partial) (delete-if #'(lambda (x) (eq x property)) (getf object-lock :partial) :key #'first))))
-		     (progn
-		       (log:error "No lock for thread ~a exists!" thread)
-		       (cerror "Ignore and continue." "No lock for thread exists!")
-		       (return-from release-lock nil)))))
+				       (when (<= (decf (the fixnum (nth 4 it))) 0)
+					 (trivial-utilities:aif (delete-if #'(lambda (x) (eq x thread)) entry :key #'third)
+								(setf (cadar (member property (getf object-lock :partial) :key #'first :test test)) it)
+								(setf (getf object-lock :partial) (delete-if #'(lambda (x) (eq x property)) (getf object-lock :partial) :key #'first))))
+				       (progn
+					 (log:error "No lock for thread ~a exists!" thread)
+					 (cerror "Ignore and continue." "No lock for thread exists!")
+					 (return-from release-lock nil)))))
 	  
 	  (trivial-utilities:aif (car (member thread (getf object-lock :full) :key #'third))
-	       (when (<= (decf (the fixnum (nth 4 it))) 0)
-		 (setf (getf object-lock :full)
-		       (delete-if #'(lambda (x) (eq x thread)) (getf object-lock :full) :key #'third)))
-	       (progn
-		 (log:error "No lock for thread ~a exists!" thread)
-		 (cerror "Ignore and continue." "No lock for thread exists!")
-		 (return-from release-lock nil))))
+				 (when (<= (decf (the fixnum (nth 4 it))) 0)
+				   (setf (getf object-lock :full)
+					 (delete-if #'(lambda (x) (eq x thread)) (getf object-lock :full) :key #'third)))
+				 (progn
+				   (log:error "No lock for thread ~a exists!" thread)
+				   (cerror "Ignore and continue." "No lock for thread exists!")
+				   (return-from release-lock nil))))
 
       (if (and (null (getf object-lock :partial))
 	       (null (getf object-lock :full)))
