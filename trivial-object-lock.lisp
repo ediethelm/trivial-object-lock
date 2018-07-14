@@ -13,7 +13,6 @@
 (define-condition interrupt-execution (condition) ())
 (define-condition lock-timeout (condition) ())
 
-@export
 (defun acquire-lock (object property
 		     &key (blocking t) (timeout nil) (test #'eq)
 		     &aux (object-lock nil) (cond-var nil) (thread (bordeaux-threads:current-thread)))
@@ -109,7 +108,6 @@ Returns *NIL* if the lock was acquired; otherwise it returns a conditional varia
 
   (return-from find-next-waiting-lock (if part part (list next))))
 
-@export
 (defun release-lock (object property
 		     &key (test #'eq)
 		     &aux (object-lock nil) (thread (bordeaux-threads:current-thread)))
@@ -165,7 +163,6 @@ Relates to *ACQUIRE-LOCK*"
 
   (return-from release-lock nil))
 
-@export
 (defmacro with-object-lock-held ((object &key (test #'eq) (property nil) (timeout nil)) &body body)
   "Supporting macro to simplify usage of *ACQUIRE-LOCK* and *RELEASE-LOCK*."
   (trivial-utilities:once-only (object property)

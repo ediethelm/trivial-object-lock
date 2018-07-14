@@ -11,8 +11,7 @@
 	       :log4cl
 	       :bordeaux-threads
 	       :iterate
-	       :mgl-pax
-	       :cl-annot)
+	       :mgl-pax)
   :in-order-to ((test-op (test-op :trivial-object-lock/test)))
   :components ((:file "package")
 	       (:file "trivial-object-lock")
