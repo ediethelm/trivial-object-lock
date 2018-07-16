@@ -2,7 +2,6 @@
 ;;;; This code is licensed under the MIT license.
 
 (in-package :trivial-object-lock)
-(annot:enable-annot-syntax)
 
 (defvar *locks-held* (make-hash-table :test #'equal))
 (defvar *function-lock* (bordeaux-threads:make-lock "FunctionLock"))
