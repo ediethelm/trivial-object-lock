@@ -2,6 +2,7 @@
 
 ###### \[in package TRIVIAL-OBJECT-LOCK\]
 [![pipeline status](https://gitlab.com/ediethelm/trivial-object-lock/badges/master/pipeline.svg)](https://gitlab.com/ediethelm/trivial-object-lock/commits/master)
+[![Quicklisp](http://quickdocs.org/badge/trivial-object-lock.svg)](http://quickdocs.org/trivial-object-lock/)
 
 ## Description
 
@@ -14,14 +15,7 @@ A *PARTIAL-LOCK* blocks access to a property of the *SYMBOL*. A property can be 
 
 ## Installing trivial-object-lock
 
-Since this project is not yet available in the latest [QuickLisp](https://www.quicklisp.org/beta/ "QuickLisp") distribution, it has to be copied to your local-projects folder:
-
-```bash
-cd $HOME/quicklisp/local-projects
-git clone https://gitlab.com/ediethelm/trivial-object-lock.git
-```
-
-After the files are copied, we can use [QuickLisp](https://www.quicklisp.org/beta/ "QuickLisp") to load trivial-object-lock:
+This project is available in the latest [QuickLisp](https://www.quicklisp.org/beta/ "QuickLisp") distribution, so installing it is reduced to calling:
 
 ```lisp
 (ql:quickload :trivial-object-lock)
