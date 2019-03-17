@@ -4,7 +4,8 @@
 (in-package :trivial-object-lock)
 
 (defsection @trivial-object-lock-manual (:title "Trivial Object Lock Manual")
-  "[![pipeline status](https://gitlab.com/ediethelm/trivial-object-lock/badges/master/pipeline.svg)](https://gitlab.com/ediethelm/trivial-object-lock/commits/master)"
+  "[![pipeline status](https://gitlab.com/ediethelm/trivial-object-lock/badges/master/pipeline.svg)](https://gitlab.com/ediethelm/trivial-object-lock/commits/master)
+[![Quicklisp](http://quickdocs.org/badge/trivial-object-lock.svg)](http://quickdocs.org/trivial-object-lock/)"
   (@trivial-object-lock-description section)
   (@trivial-object-lock-installing section)
   (@trivial-object-lock-example section)
@@ -23,14 +24,7 @@ A *PARTIAL-LOCK* blocks access to a property of the *SYMBOL*. A property can be 
 *PARTIAL-LOCK*s allow simultameous access to different properties of a *SYMBOL*, while being superseeded by any *FULL-LOCK*.")
 
 (defsection @trivial-object-lock-installing (:title "Installing trivial-object-lock")
-  "Since this project is not yet available in the latest [QuickLisp](https://www.quicklisp.org/beta/ \"QuickLisp\") distribution, it has to be copied to your local-projects folder:
-
-```bash
-cd $HOME/quicklisp/local-projects
-git clone https://gitlab.com/ediethelm/trivial-object-lock.git
-```
-
-After the files are copied, we can use [QuickLisp](https://www.quicklisp.org/beta/ \"QuickLisp\") to load trivial-object-lock:
+  "This project is available in the latest [QuickLisp](https://www.quicklisp.org/beta/ \"QuickLisp\") distribution, so installing it is reduced to calling:
 
 ```lisp
 (ql:quickload :trivial-object-lock)
@@ -80,3 +74,12 @@ Note: The sequence '=>' indicates the result from evaluating the previous expres
 
 (defsection @trivial-object-lock-contributing (:title "Contributing to this project")
   "Please refer to the [CONTRIBUTING](https://gitlab.com/ediethelm/trivial-object-lock/blob/master/CONTRIBUTING.md 'Contributing') document for more information.")
+
+(defun update-readme ()
+  (with-open-file (stream (uiop:merge-pathnames*
+			   "README.md"
+			   (asdf:system-source-directory :trivial-object-lock))
+			  :direction :output
+			  :if-exists :supersede)
+    (describe @trivial-object-lock-manual stream)))
+

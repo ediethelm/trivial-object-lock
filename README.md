@@ -83,4 +83,3 @@ This library is released under the MIT License. Please refer to the [LICENSE](ht
 ## Contributing to this project
 
 Please refer to the [CONTRIBUTING](https://gitlab.com/ediethelm/trivial-object-lock/blob/master/CONTRIBUTING.md "Contributing") document for more information.
-
