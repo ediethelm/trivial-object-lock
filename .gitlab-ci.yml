@@ -30,4 +30,4 @@ sbcl-test:
   script:
     - sbcl --non-interactive --eval "(progn 
                                        (ql:quickload :trivial-object-lock/test-with-coverage)
-                                       (asdf:oos 'asdf:test-op :trivial-object-lock/test-with-coverage))"
+                                       (asdf:oos 'asdf:test-op :trivial-object-lock/test-with-coverage :force t))"
