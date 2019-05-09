@@ -16,7 +16,9 @@ sbcl-build:
   stage: build
   script:
     - sbcl --non-interactive --eval "(ql:quickload :trivial-utilities)"
-
+  artifacts:
+    paths:
+      -  ~/quicklisp/local-projects/
 
 ccl-build:
   stage: build
@@ -28,6 +30,7 @@ ccl-build:
 
 sbcl-test:
   stage: test
-  coverage: '/Test coverage: (\d+\.\d+)%/'
+  dependencies:
+    - sbcl-build
   script:
     - sbcl --non-interactive --eval "(asdf:oos 'asdf:test-op :trivial-object-lock/test-with-coverage)"
