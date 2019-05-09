@@ -25,3 +25,19 @@
   :depends-on (:trivial-object-lock fiveam)
   :perform (test-op (o s) (uiop:symbol-call :fiveam  '#:run! :trivial-object-lock-tests))
   :components ((:file "test-trivial-object-lock")))
+
+(defsystem :trivial-object-lock/test-with-coverage
+  :name "trivial-object-lock/test-with-coverage"
+  :description "Run the Unit Tests for the trivial-object-lock project and print the code coverage."
+  :author "Eric Diethelm <ediethelm@yahoo.com>"
+  :licence "MIT"
+  :depends-on (:trivial-coverage
+	       fiveam)
+  :perform (load-op (o s) (uiop:symbol-call :trivial-coverage
+					    '#:test-and-print-coverage
+					    :trivial-object-lock
+					    :exclude '("test-trivial-object-lock.lisp" 
+						       "documentation.lisp"
+						       "package.lisp")
+					    :keep-report t)))
+

@@ -2,12 +2,14 @@ image: daewok/lisp-devel
 
 stages:
   - build
+  - test
 
 before_script:
   - apt-get update -qy
   - apt-get install -y git-core
   - cp -r /builds/ediethelm/trivial-object-lock ~/quicklisp/local-projects/trivial-object-lock
   - git clone https://gitlab.com/ediethelm/trivial-utilities.git ~/quicklisp/local-projects/trivial-utilities
+  - git clone https://gitlab.com/ediethelm/trivial-coverage.git ~/quicklisp/local-projects/trivial-coverage
 
 
 sbcl-build:
@@ -24,3 +26,8 @@ ccl-build:
                                            (uiop:quit 1))))
                     (ql:quickload :trivial-utilities))"
 
+sbcl-test:
+  stage: test
+  coverage: '/Test coverage: (\d+\.\d+)%/'
+  script:
+    - sbcl --non-interactive --eval "(asdf:oos 'asdf:test-op :trivial-object-lock/test-with-coverage)"
