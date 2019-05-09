@@ -28,4 +28,6 @@ ccl-build:
 sbcl-test:
   stage: test
   script:
-    - sbcl --non-interactive --eval "(asdf:oos 'asdf:test-op :trivial-object-lock/test-with-coverage)"
+    - sbcl --non-interactive --eval "(progn 
+                                       (ql:quickload :trivial-object-lock/test-with-coverage)
+                                       (asdf:oos 'asdf:test-op :trivial-object-lock/test-with-coverage)"
