@@ -28,12 +28,12 @@ ccl-build:
 sbcl-test:
   stage: test
   script:
-    - sbcl --non-interactive --eval "(progn 
+    - sbcl --non-interactive --eval '(progn 
                                        (ql:quickload :trivial-coverage)
                                        (uiop:symbol-call :trivial-coverage
 					                               '#:test-and-print-coverage
 					                               :trivial-object-lock
-					                               :exclude '(\"test-trivial-object-lock.lisp\" 
-						                                        \"documentation.lisp\"
-						                                        \"package.lisp\")
-					                               :keep-report t))"
+					                               :exclude ''("test-trivial-object-lock.lisp" 
+						                                        "documentation.lisp"
+						                                        "package.lisp")
+					                               :keep-report t))'
