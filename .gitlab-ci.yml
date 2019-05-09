@@ -33,7 +33,7 @@ sbcl-test:
                                        (uiop:symbol-call :trivial-coverage
 					                               '#:test-and-print-coverage
 					                               :trivial-object-lock
-					                               :exclude '("test-trivial-object-lock.lisp" 
-						                                        "documentation.lisp"
-						                                        "package.lisp")
+					                               :exclude '(\"test-trivial-object-lock.lisp\" 
+						                                        \"documentation.lisp\"
+						                                        \"package.lisp\")
 					                               :keep-report t))"
