@@ -15,7 +15,7 @@ before_script:
 sbcl-build:
   stage: build
   script:
-    - sbcl --non-interactive --eval "(ql:quickload :trivial-utilities)"
+    - sbcl --non-interactive --eval "(ql:quickload :trivial-object-lock)"
 
 ccl-build:
   stage: build
@@ -23,11 +23,17 @@ ccl-build:
     - ccl --eval "(let ((*debugger-hook* (lambda (c m)
                                            (declare (ignore c m))
                                            (uiop:quit 1))))
-                    (ql:quickload :trivial-utilities))"
+                    (ql:quickload :trivial-object-lock))"
 
 sbcl-test:
   stage: test
   script:
     - sbcl --non-interactive --eval "(progn 
-                                       (ql:quickload :trivial-object-lock/test-with-coverage)
-                                       (asdf:oos 'asdf:test-op :trivial-object-lock/test-with-coverage :force t))"
+                                       (ql:quickload :trivial-coverage)
+                                       (uiop:symbol-call :trivial-coverage
+					                               '#:test-and-print-coverage
+					                               :trivial-object-lock
+					                               :exclude '("test-trivial-object-lock.lisp" 
+						                                        "documentation.lisp"
+						                                        "package.lisp")
+					                               :keep-report t))"
