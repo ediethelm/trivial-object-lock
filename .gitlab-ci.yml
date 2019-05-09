@@ -18,7 +18,7 @@ sbcl-build:
     - sbcl --non-interactive --eval "(ql:quickload :trivial-utilities)"
   artifacts:
     paths:
-      -  ~/quicklisp/local-projects/
+      -  ~/quicklisp/local-projects/*
 
 ccl-build:
   stage: build
