@@ -5,7 +5,8 @@
 
 (defsection @trivial-object-lock-manual (:title "Trivial Object Lock Manual")
   "[![pipeline status](https://gitlab.com/ediethelm/trivial-object-lock/badges/master/pipeline.svg)](https://gitlab.com/ediethelm/trivial-object-lock/commits/master)
-[![Quicklisp](http://quickdocs.org/badge/trivial-object-lock.svg)](http://quickdocs.org/trivial-object-lock/)"
+[![Quicklisp](http://quickdocs.org/badge/trivial-object-lock.svg)](http://quickdocs.org/trivial-object-lock/)
+[![coverage report](https://gitlab.com/ediethelm/trivial-object-lock/badges/master/coverage.svg?job=sbcl-test)](https://gitlab.com/ediethelm/trivial-object-lock/commits/master)"
   (@trivial-object-lock-description section)
   (@trivial-object-lock-installing section)
   (@trivial-object-lock-example section)

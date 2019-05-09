@@ -27,6 +27,7 @@ ccl-build:
 
 sbcl-test:
   stage: test
+  coverage: '/Test coverage: (\d+\.\d+)%/'
   script:
     - sbcl --non-interactive --eval "(progn 
                                        (ql:quickload :trivial-coverage)

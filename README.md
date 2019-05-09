@@ -3,6 +3,7 @@
 ###### \[in package TRIVIAL-OBJECT-LOCK\]
 [![pipeline status](https://gitlab.com/ediethelm/trivial-object-lock/badges/master/pipeline.svg)](https://gitlab.com/ediethelm/trivial-object-lock/commits/master)
 [![Quicklisp](http://quickdocs.org/badge/trivial-object-lock.svg)](http://quickdocs.org/trivial-object-lock/)
+[![coverage report](https://gitlab.com/ediethelm/trivial-object-lock/badges/master/coverage.svg?job=sbcl-test)](https://gitlab.com/ediethelm/trivial-object-lock/commits/master)
 
 ## Description
 
