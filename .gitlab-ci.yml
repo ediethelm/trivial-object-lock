@@ -39,3 +39,9 @@ sbcl-test:
                                                     \"documentation.lisp\"
                                                     \"package.lisp\")
                                          :keep-report t))"
+  after_script:
+    - cp -r ~/quicklisp/local-projects/trivial-object-lock/coverage-report /builds/ediethelm/trivial-object-lock/coverage-report
+  artifacts:
+    paths:
+      - coverage-report/
+
