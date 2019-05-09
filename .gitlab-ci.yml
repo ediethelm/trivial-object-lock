@@ -30,6 +30,7 @@ sbcl-test:
   script:
     - sbcl --non-interactive --eval "(progn 
                                        (ql:quickload :trivial-coverage)
+                                       (ql:quickload :trivial-object-lock)
                                        (uiop:symbol-call :trivial-coverage
                                          '#:test-and-print-coverage
                                          :trivial-object-lock
