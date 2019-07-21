@@ -4,7 +4,7 @@
   :name "trivial-object-lock"
   :description "A simple method to lock object (and slot) access."
   :long-description ""
-  :version "0.3.2"
+  :version "0.3.3"
   :author "Eric Diethelm <ediethelm@yahoo.com>"
   :licence "MIT"
   :depends-on (:trivial-utilities
@@ -25,20 +25,4 @@
   :depends-on (:trivial-object-lock fiveam)
   :perform (test-op (o s) (uiop:symbol-call :fiveam  '#:run! :trivial-object-lock-tests))
   :components ((:file "test-trivial-object-lock")))
-
-(defsystem :trivial-object-lock/test-with-coverage
-  :name "trivial-object-lock/test-with-coverage"
-  :description "Run the Unit Tests for the trivial-object-lock project and print the code coverage."
-  :author "Eric Diethelm <ediethelm@yahoo.com>"
-  :licence "MIT"
-  :depends-on (:trivial-object-lock
-               :trivial-coverage
-	       fiveam)
-  :perform (load-op (o s) (uiop:symbol-call :trivial-coverage
-					    '#:test-and-print-coverage
-					    :trivial-object-lock
-					    :exclude '("test-trivial-object-lock.lisp" 
-						       "documentation.lisp"
-						       "package.lisp")
-					    :keep-report t)))
 
