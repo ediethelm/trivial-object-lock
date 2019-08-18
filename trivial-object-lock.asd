@@ -4,18 +4,16 @@
   :name "trivial-object-lock"
   :description "A simple method to lock object (and slot) access."
   :long-description ""
-  :version "0.3.3"
+  :version "0.3.4"
   :author "Eric Diethelm <ediethelm@yahoo.com>"
   :licence "MIT"
   :depends-on (:trivial-utilities
 	       :log4cl
 	       :bordeaux-threads
-	       :iterate
-	       :mgl-pax)
+	       :iterate)
   :in-order-to ((test-op (test-op :trivial-object-lock/test)))
   :components ((:file "package")
-	       (:file "trivial-object-lock")
-	       (:file "documentation")))
+	       (:file "trivial-object-lock")))
 
 (defsystem :trivial-object-lock/test
   :name "trivial-object-lock/test"
